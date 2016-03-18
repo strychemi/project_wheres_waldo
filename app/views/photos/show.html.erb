@@ -1,21 +1,24 @@
 
-<div id="waldo-photo">
+<div id="waldo-photo" class="searching">
 
-    <%= image_tag "1.jpg" %>
+  <%= image_tag "1.jpg", class: "searching" %>
 
   <div class="target">
     <div class='dropdown'>
 
       <div class="name">
-        <%= form_for @tag, remote: true do |f| %>
-          <% @characters.each do |character| %>
-            <%= character.name %>
-            <%= f.hidden_field :character_id, {value: character.id, class: "name" } %>
-          <% end %>
-          <%= f.submit %>
+        <% @characters.each do |character| %>
+          <%= button_to character.name, tags_path, {method: :post, remote: true, class: "btn btn-default btn-block", id: "button-#{character.id}" } %>
         <% end %>
       </div>
 
     </div>
   </div>
+
+  <div class="tag" id='tag-prototype'>
+    <div class="delete-tag">X</div>
+    <div class="tagged-name">Nancy</div>
+  </div>
+
+  
 </div>

@@ -8,7 +8,6 @@ class PhotosController < ApplicationController
 
 
   def show
-    @tag = Tag.new
     @characters = Character.all    
   end
 

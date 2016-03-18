@@ -26,6 +26,72 @@
     cursor: none;
   }
 
+  .dropdown {
+    display: none;
+    position: relative;
+    top: 35px;
+    left: -55px;
+    pointer-events: all;
+    width: 150px;
+  }
+
+  .target.clicked {
+    opacity: 1;
+  }
+
+
+  .faded {
+    opacity: 0.5;
+  }
+
+  .tag:hover {
+    opacity: 1;
+  }
+
+  .tagged-name {
+    text-align: center;
+    position: relative;
+    top: 100px;
+    background-color: chartreuse;
+    width: 100px;
+    padding: 10px 10px;
+    left: -10px;
+    font-weight: bold;
+  }
+
+  .delete-tag {
+    position: absolute;
+    font-family: sans-serif;
+    font-weight: bold;
+    right: -20px;
+    top: -20px;
+    background-color: chartreuse;
+    border-radius: 50%;
+    border: 10px solid chartreuse;
+  }
+
+  .delete-tag:hover {
+    pointer-events: auto;
+    cursor: pointer;
+    color: red;
+  }
+
+  #tag-prototype {
+    display: none;
+  }
+
+  .name {
+    font-family: sans-serif;
+    padding: 3px;
+  }
+
+  .name:hover {
+    font-weight: bold;
+    cursor: pointer;
+  }
+
 
 
 }
+
+

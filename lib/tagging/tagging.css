@@ -1,19 +1,12 @@
-.kittens {
-  height: 700px;
-  width: auto;
-}
 
-.target.active {
-  opacity: 1;
-}
 
-.tag {
+/*.tag {
   height: 100px;
   width: 100px;
   border: 10px solid chartreuse;
   position: absolute;
   transition: opacity 1s;
-}
+}*/
 
 .faded {
   opacity: 0.5;
@@ -51,15 +44,7 @@
   color: red;
 }
 
-.target {
-  z-index: 100;
-  height: 100px;
-  width: 100px;
-  border: 10px solid purple;
-  position: absolute;
-  opacity: 0;
-  pointer-events: none;
-}
+
 
 #tag-prototype {
   display: none;
