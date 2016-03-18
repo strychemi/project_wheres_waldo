@@ -39,6 +39,8 @@ ActiveRecord::Schema.define(version: 20160318184853) do
   create_table "tags", force: :cascade do |t|
     t.integer  "character_id"
     t.integer  "photo_id"
+    t.float    "x"
+    t.float    "y"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end

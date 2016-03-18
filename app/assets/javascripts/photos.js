@@ -1,25 +1,25 @@
 var displayTarget = function() {
   $('.target').addClass("active searching");
-}
+};
 
 var hideTarget = function() {
   $('.target').removeClass("active searching");
-}
+};
 
 var animateDropdown = function() {
   $('.dropdown').slideDown();
-}
+};
 
 var hideDropdown = function() {
   $('.dropdown').slideUp();
-}
+};
 
 
 $(document).ready(function() {
 
   if ($('#photos-show').length) {
 
-    $('#waldo-photo').hover(displayTarget, hideTarget)
+    $('#waldo-photo').hover(displayTarget, hideTarget);
 
     // make sure cursor is in the center of tagging box
     $('#waldo-photo').on('mousemove', function(e) {
@@ -28,9 +28,9 @@ $(document).ready(function() {
         $('.target').css({
           left: e.pageX - 20,
           top: e.pageY - 20
-        })
+        });
       }
-    })
+    });
 
     // if you click, stop the box from moving
     $('#waldo-photo').click(function() {
@@ -43,8 +43,21 @@ $(document).ready(function() {
         $('.target').removeClass('clicked');
         hideDropdown();
       }
-    })
+    });
 
+    $(".button_to").on("click", function(e) {
+      e.preventDefault();
+      var el = e.target;
+      console.log(e);
+      $.post({
+        url: "/tags.json",
+        dataType: "json",
+        data: { tag: { character_id: el.id.slice(7), photo_id: 1, x: e.pageX, y: e.pageY } },
+        success: function(json) {
+          //showTag();
+        }
+      });
+    });
   }
 
 });
