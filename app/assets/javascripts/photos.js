@@ -1,9 +1,9 @@
 var displayTarget = function() {
-  $('.target').addClass("active");
+  $('.target').addClass("active searching");
 }
 
 var hideTarget = function() {
-  $('.target').removeClass("active");
+  $('.target').removeClass("active searching");
 }
 
 var animateDropdown = function() {
@@ -38,23 +38,25 @@ function Tag(x, y, name) {
 
 $(document).ready(function() {
 
-  $('.kittens').hover(displayTarget, hideTarget)
+  if ($('#photos-show').length) {
 
-  // make sure cursor is in the center of tagging box
-  $('.kittens').on('mousemove', function(e) {
-    // make the box float on mouse move
-    if ($(this).hasClass('searching')) {
-      $('.target').css({
-        left: e.pageX - 50,
-        top: e.pageY - 50
-      })
-    } else {
+    $('#waldo-photo').hover(displayTarget, hideTarget)
 
+
+    // make sure cursor is in the center of tagging box
+    $('#waldo-photo').on('mousemove', function(e) {
+      // make the box float on mouse move
+      if ($(this).hasClass('searching')) {
+        $('.target').css({
+          left: e.pageX - 20,
+          top: e.pageY - 20
+        })
       }
-  })
+    })
+
 
   // if you click, stop the box from moving
-  $('.kittens').click(function() {
+  $('#waldo-photo').click(function() {
     if ($(this).hasClass('searching')) {
       $(this).removeClass('searching');
       $('.target').addClass('clicked');
@@ -75,5 +77,9 @@ $(document).ready(function() {
     $('.target').removeClass('clicked');
     hideDropdown();
   });
+
+
+
+  }
 
 });

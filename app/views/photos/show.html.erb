@@ -1,0 +1,21 @@
+
+<div id="waldo-photo">
+
+    <%= image_tag "1.jpg" %>
+
+  <div class="target">
+    <div class='dropdown'>
+
+      <div class="name">
+        <%= form_for @tag, remote: true do |f| %>
+          <% @characters.each do |character| %>
+            <%= character.name %>
+            <%= f.hidden_field :character_id, {value: character.id, class: "name" } %>
+          <% end %>
+          <%= f.submit %>
+        <% end %>
+      </div>
+
+    </div>
+  </div>
+</div>
