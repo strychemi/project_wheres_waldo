@@ -14,6 +14,24 @@ var hideDropdown = function() {
   $('.dropdown').slideUp();
 };
 
+function Tag(x, y, name) {
+  var self = this;
+  this.x = x;
+  this.y = y;
+  this.html = $('#tag-prototype').clone().removeAttr('id');
+  $('body').append(this.html);
+  this.html.show();
+  //this.html.addClass('faded');
+  this.html.find('.tagged-name').html(name);
+  this.html.css({
+    left: x,
+    top: y
+  });
+  this.html.find('.delete-tag').click(function() {
+    self.html.fadeOut();
+  });
+}
+
 
 $(document).ready(function() {
 
@@ -38,7 +56,7 @@ $(document).ready(function() {
     $('#waldo-photo').click(function() {
       if ($(this).hasClass('searching')) {
         $(this).removeClass('searching');
-        // $('.target').addClass('clicked');
+        $('.target').addClass('clicked');
         animateDropdown();
       } else {
         $(this).addClass('searching');
@@ -49,13 +67,25 @@ $(document).ready(function() {
 
     $(".button_to").on("click", function(e) {
       e.preventDefault();
-      var el = e.target;
+      var $el = $(e.target);
       $.post({
-        url: "/tags.json",
-        dataType: "json",
-        data: { tag: { character_id: el.id.slice(7), photo_id: 1, x: e.pageX, y: e.pageY } },
-        success: function(json) {
-          //showTag();
+        url: "/tags",
+        dataType: "script",
+        data: { tag: { character_id: $el.attr("data-character"), photo_id: 1, x: e.pageX, y: e.pageY } },
+        success: function(data) {
+
+          // var name = $el.attr("value");
+          // var position = $(".target").position();
+          // tag = new Tag(position.left, position.top, name);
+          // $('#waldo-photo').addClass('searching');
+          // $('.target').removeClass('clicked');
+          // hideDropdown();
+
+
+        },
+        error: function(xhr, status, errorThrown) {
+          console.log("Error: " + errorThrown);
+          console.log("Status: " + status);
         }
       });
     });

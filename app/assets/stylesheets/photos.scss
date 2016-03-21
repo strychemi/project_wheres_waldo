@@ -45,6 +45,13 @@
     opacity: 1;
   }
 
+  .tag {
+    height: 40px;
+    width: 40px;
+    border: 5px solid green;
+    position: absolute;
+  }
+
 
   .faded {
     opacity: 0.5;
