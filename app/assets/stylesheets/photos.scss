@@ -19,6 +19,13 @@
     pointer-events: none;
   }
 
+  .tag {
+    height: 40px;
+    width: 40px;
+    border: 5px solid blue;
+    position: absolute;
+  }
+
   .target.active {
     opacity: 1;
   }
@@ -40,14 +47,6 @@
     opacity: 1;
   }
 
-  .tag {
-    height: 40px;
-    width: 40px;
-    border: 5px solid green;
-    position: absolute;
-  }
-
-
   .faded {
     opacity: 0.5;
   }
@@ -57,14 +56,14 @@
   }
 
   .tagged-name {
-    text-align: center;
     position: relative;
-    top: 100px;
-    //background-color: chartreuse;
-    width: 100px;
-    padding: 10px 10px;
-    left: -10px;
-    font-weight: bold;
+    top: 40px;
+    color: black;
+    font-size: 12px;
+    background-color: white;
+    //width: 50px;
+    //padding: 10px 10px;
+    //left: -10px;
   }
 
   .delete-tag {
@@ -74,6 +73,7 @@
     right: -20px;
     top: -20px;
     //background-color: chartreuse;
+    color: blue;
     border-radius: 50%;
     //border: 10px solid chartreuse;
   }

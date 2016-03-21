@@ -18,8 +18,11 @@ function Tag(x, y, name) {
   var self = this;
   this.x = x;
   this.y = y;
+
+  //this.html = $("<tag></tag>");
   this.html = $('#tag-prototype').clone().removeAttr('id');
-  $('body').append(this.html);
+
+  $('#photos-show').append(this.html);
   this.html.show();
   //this.html.addClass('faded');
   this.html.find('.tagged-name').html(name);
@@ -74,13 +77,12 @@ $(document).ready(function() {
         data: { tag: { character_id: $el.attr("data-character"), photo_id: 1, x: e.pageX, y: e.pageY } },
         success: function(data) {
 
-          // var name = $el.attr("value");
-          // var position = $(".target").position();
-          // tag = new Tag(position.left, position.top, name);
-          // $('#waldo-photo').addClass('searching');
-          // $('.target').removeClass('clicked');
-          // hideDropdown();
-
+          var name = $el.attr("value");
+          var position = $(".target").position();
+          var tag = new Tag(position.left, position.top, name);
+          $('#waldo-photo').addClass('searching');
+          $('.target').removeClass('clicked');
+          hideDropdown();
 
         },
         error: function(xhr, status, errorThrown) {
