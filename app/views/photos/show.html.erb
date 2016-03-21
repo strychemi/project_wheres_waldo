@@ -1,14 +1,14 @@
 
 <a id="waldo-photo" class="searching">
 
-  <%= image_tag "1.jpg", class: "searching" %>
+  <%= image_tag "#{@photo.id}.jpg", class: "searching" %>
 
   <div class="target">
     <div class='dropdown'>
 
       <div class="name">
         <% @characters.each do |character| %>
-          <%= button_to character.name, tags_path, {method: :post, remote: true, class: "btn btn-default btn-block", id: "button-#{character.id}" } %>
+          <%= button_to character.name, tags_path, {method: :post, remote: true, class: "btn btn-default btn-block", data: { character: "#{character.id}"} } %>
         <% end %>
       </div>
 

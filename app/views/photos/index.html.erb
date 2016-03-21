@@ -1,1 +1,4 @@
-Here be photoz
+<h3>Photos Index</h3>
+<% @photos.each do |photo| %>
+  <%= link_to photo.name, photo_path(photo) %>
+<% end %>

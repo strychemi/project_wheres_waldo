@@ -2,12 +2,16 @@ class TagsController < ApplicationController
 
   def create
     @tag = Tag.new(tag_params)
+    char_id = @tag.character_id
+    photo_id = @tag.photo_id
+    previousInstance = Tag.find_by(photo_id: photo_id, character_id: char_id)
+    previousInstance.destroy if previousInstance
     respond_to do |format|
       if @tag.save
-        format.html
-        format.json { redirect_to photo_path(@tag.photo_id) }
+        format.html { redirect_to @tag, notice: "Successfully created!" }
+        format.json { render json: @tag, status: :created }
       else
-        format.html
+        format.html { render :new }
         format.json { redirect_to photo_path(@tag.photo_id) }
       end
     end

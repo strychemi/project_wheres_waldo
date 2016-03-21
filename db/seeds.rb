@@ -13,3 +13,7 @@ characters = ["Waldo", "Wenda", "Odlaw", "Wizard Whitebeard", "Woof"]
 characters.each do |character|
   Character.create(name: character)
 end
+
+p = Photo.new
+p.name = "The Gobbling Gluttons"
+p.save

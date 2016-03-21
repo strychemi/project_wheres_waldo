@@ -17,6 +17,8 @@ var hideDropdown = function() {
 
 $(document).ready(function() {
 
+  var charactersList = $(".data-character");
+
   if ($('#photos-show').length) {
 
     $('#waldo-photo').hover(displayTarget, hideTarget);
@@ -48,7 +50,6 @@ $(document).ready(function() {
     $(".button_to").on("click", function(e) {
       e.preventDefault();
       var el = e.target;
-      console.log(e);
       $.post({
         url: "/tags.json",
         dataType: "json",
