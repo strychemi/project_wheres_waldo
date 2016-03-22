@@ -14,31 +14,33 @@ var hideDropdown = function() {
   $('.dropdown').slideUp();
 };
 
-function Tag(x, y, name) {
+var makeTag = function(x, y, name) {
   var self = this;
-  this.x = x;
-  this.y = y;
 
-  //this.html = $("<tag></tag>");
-  this.html = $('#tag-prototype').clone().removeAttr('id');
+  $tag = $("<div></div>");
+  $tag.attr("class", "tag");
+  $tag.css( { left: x, top: y } );
 
-  $('#photos-show').append(this.html);
-  this.html.show();
-  //this.html.addClass('faded');
-  this.html.find('.tagged-name').html(name);
-  this.html.css({
-    left: x,
-    top: y
+  $deleteTag = $("<div></div>");
+  $deleteTag.text("X");
+  $deleteTag.attr("class", "delete-tag");
+  $deleteTag.appendTo($tag);
+
+  $tagName = $("<p></p>");
+  $tagName.text(name);
+  $tagName.attr("class", "tagged-name");
+  $tagName.appendTo($tag);
+
+  $('#photos-show').append($tag);
+  $('.tag').on("click", ".delete-tag", function(e) {
+    var $el = $(e.target);
+    $el.parent().remove();
   });
-  this.html.find('.delete-tag').click(function() {
-    self.html.fadeOut();
-  });
-}
+};
 
 
 $(document).ready(function() {
 
-  var charactersList = $(".data-character");
 
   if ($('#photos-show').length) {
 
@@ -79,7 +81,7 @@ $(document).ready(function() {
 
           var name = $el.attr("value");
           var position = $(".target").position();
-          var tag = new Tag(position.left, position.top, name);
+          var tag = makeTag(position.left, position.top, name);
           $('#waldo-photo').addClass('searching');
           $('.target').removeClass('clicked');
           hideDropdown();
