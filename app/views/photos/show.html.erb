@@ -15,3 +15,10 @@
     </div>
   </div>
 </a>
+
+<% @tagged.each do |tag| %>
+  <div class="tag" style="<%="left: #{tag.x}px; top: #{tag.y}px"%>">
+    <div class="delete-tag">X</div>
+    <p class="tagged-name"><%= tag.character.name %></p>
+  </div>
+<% end %>

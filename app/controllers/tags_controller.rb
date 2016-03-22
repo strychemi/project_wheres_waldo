@@ -1,4 +1,11 @@
 class TagsController < ApplicationController
+  def show
+    @tag = Tag.find(params[:id])
+    respond_to do |format|
+      format.html {}
+      format.json { render json: @tag, status: 200 }
+    end
+  end
 
   def create
     @tag = Tag.new(tag_params)
@@ -12,10 +19,10 @@ class TagsController < ApplicationController
     respond_to do |format|
       if @tag.save
         format.html { redirect_to @tag, notice: "Successfully created!" }
-        format.js
+        format.json { render json: @tag, status: :created}
       else
         format.html { render :new }
-        format.js { render @tag, status: 422 }
+        format.json { render @tag, status: 422 }
       end
     end
   end

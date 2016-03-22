@@ -1,3 +1,4 @@
+
 var displayTarget = function() {
   $('.target').addClass("active searching");
 };
@@ -14,7 +15,9 @@ var hideDropdown = function() {
   $('.dropdown').slideUp();
 };
 
-var makeTag = function(x, y, name) {
+var charList = ["Waldo", "Wenda", "Oldlaw", "Wizard Whitebeard", "Woof"];
+
+var makeTag = function(x, y, charId) {
   var self = this;
 
   $tag = $("<div></div>");
@@ -27,7 +30,7 @@ var makeTag = function(x, y, name) {
   $deleteTag.appendTo($tag);
 
   $tagName = $("<p></p>");
-  $tagName.text(name);
+  $tagName.text(charList[charId - 1]);
   $tagName.attr("class", "tagged-name");
   $tagName.appendTo($tag);
 
@@ -40,7 +43,6 @@ var makeTag = function(x, y, name) {
 
 
 $(document).ready(function() {
-
 
   if ($('#photos-show').length) {
 
@@ -73,19 +75,16 @@ $(document).ready(function() {
     $(".button_to").on("click", function(e) {
       e.preventDefault();
       var $el = $(e.target);
+      var position = $(".target").position();
       $.post({
-        url: "/tags",
-        dataType: "script",
-        data: { tag: { character_id: $el.attr("data-character"), photo_id: 1, x: e.pageX, y: e.pageY } },
+        url: "/tags.json",
+        dataType: "json",
+        data: { tag: { character_id: $el.attr("data-character"), photo_id: 1, x: position.left, y: position.top } },
         success: function(data) {
-
-          var name = $el.attr("value");
-          var position = $(".target").position();
-          var tag = makeTag(position.left, position.top, name);
+          makeTag(data.x, data.y, data.character_id);
           $('#waldo-photo').addClass('searching');
           $('.target').removeClass('clicked');
           hideDropdown();
-
         },
         error: function(xhr, status, errorThrown) {
           console.log("Error: " + errorThrown);
