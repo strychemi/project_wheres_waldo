@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 20160318184853) do
     t.datetime "updated_at",   null: false
   end
 
-  add_index "photo_characters", ["photo_id", "character_id"], name: "index_photo_characters_on_photo_id_and_character_id"
+  add_index "photo_characters", ["photo_id", "character_id"], name: "index_photo_characters_on_photo_id_and_character_id", unique: true
 
   create_table "photos", force: :cascade do |t|
     t.string   "name",       null: false
@@ -45,6 +45,6 @@ ActiveRecord::Schema.define(version: 20160318184853) do
     t.datetime "updated_at",   null: false
   end
 
-  add_index "tags", ["character_id", "photo_id"], name: "index_tags_on_character_id_and_photo_id"
+  add_index "tags", ["character_id", "photo_id"], name: "index_tags_on_character_id_and_photo_id", unique: true
 
 end

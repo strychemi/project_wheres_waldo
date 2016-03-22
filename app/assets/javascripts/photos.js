@@ -17,11 +17,12 @@ var hideDropdown = function() {
 
 var charList = ["Waldo", "Wenda", "Oldlaw", "Wizard Whitebeard", "Woof"];
 
-var makeTag = function(x, y, charId) {
+var makeTag = function(x, y, data) {
   var self = this;
 
   $tag = $("<div></div>");
   $tag.attr("class", "tag");
+  $tag.attr("data-tagid", data.id);
   $tag.css( { left: x, top: y } );
 
   $deleteTag = $("<div></div>");
@@ -30,15 +31,11 @@ var makeTag = function(x, y, charId) {
   $deleteTag.appendTo($tag);
 
   $tagName = $("<p></p>");
-  $tagName.text(charList[charId - 1]);
+  $tagName.text(charList[data.character_id - 1]);
   $tagName.attr("class", "tagged-name");
   $tagName.appendTo($tag);
 
   $('#photos-show').append($tag);
-  $('.tag').on("click", ".delete-tag", function(e) {
-    var $el = $(e.target);
-    $el.parent().remove();
-  });
 };
 
 
@@ -81,7 +78,7 @@ $(document).ready(function() {
         dataType: "json",
         data: { tag: { character_id: $el.attr("data-character"), photo_id: 1, x: position.left, y: position.top } },
         success: function(data) {
-          makeTag(data.x, data.y, data.character_id);
+          makeTag(data.x, data.y, data);
           $('#waldo-photo').addClass('searching');
           $('.target').removeClass('clicked');
           hideDropdown();
@@ -89,6 +86,7 @@ $(document).ready(function() {
         error: function(xhr, status, errorThrown) {
           console.log("Error: " + errorThrown);
           console.log("Status: " + status);
+          alert("Character is already tagged!");
         }
       });
     });

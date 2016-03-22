@@ -9,12 +9,7 @@ class TagsController < ApplicationController
 
   def create
     @tag = Tag.new(tag_params)
-    char_id = @tag.character_id
-    photo_id = @tag.photo_id
     @characters = Character.all
-
-    previous_instance = Tag.find_by(photo_id: photo_id, character_id: char_id)
-    previous_instance.destroy if previous_instance
 
     respond_to do |format|
       if @tag.save
@@ -22,6 +17,18 @@ class TagsController < ApplicationController
         format.json { render json: @tag, status: :created}
       else
         format.html { render :new }
+        format.json { render @tag, status: 422 }
+      end
+    end
+  end
+
+  def destroy
+    @tag = Tag.find(params[:id])
+
+    respond_to do |format|
+      if @tag.destroy
+        format.json { render json: @tag, status: 200 }
+      else
         format.json { render @tag, status: 422 }
       end
     end
